@@ -70,7 +70,7 @@ namespace Gametest1
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Draw);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressed);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyUP);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Keyup);
             this.ResumeLayout(false);
 
         }

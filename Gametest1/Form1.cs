@@ -19,6 +19,7 @@ namespace Gametest1
         int gravity = 1;
         int sw = 0;
         test1 t = new test1();
+        Charactor hero = new Charactor();
         Timer timer;
 
         public Form1()
@@ -37,6 +38,7 @@ namespace Gametest1
 
         private void Update(object sender, EventArgs e)
         {
+            Wall();
             Gravity();
             Invalidate();
         }
@@ -54,6 +56,14 @@ namespace Gametest1
             this.ballPos += this.ballSpeed;
         }
 
+        private void Wall()
+        {
+            if(this.ballPos.X == t.Wall(this.ballPos))
+            {
+                this.ballSpeed.X = 0;
+            }
+        }
+
         private int Grand(Vector b)
         {
             int grand;
@@ -64,31 +74,20 @@ namespace Gametest1
 
         private void Draw(object sender, PaintEventArgs e)
         {
-            
+            int x = (int)this.ballPos.X - ballRadius;
+            int y = (int)this.ballPos.Y - ballRadius;
 
-            SolidBrush pinkbrush = new SolidBrush(Color.HotPink);
-
-            float px = (float)this.ballPos.X - ballRadius;
-            float py = (float)this.ballPos.Y - ballRadius;
+            System.Drawing.Point ulCorner = new System.Drawing.Point(x, y - 10);
 
             if (sw == 1)
             {
-                e.Graphics.FillEllipse(pinkbrush, px, py, this.ballRadius * 2, this.ballRadius * 2);
                 t.Draw(sender, e);
+
+                hero.Draw(sender, e, ulCorner);
             }
             else if(sw == 0){
 
             }
-
-            Image newImage = Image.FromFile(@"C:\Users\kanon\source\testC#\Gametest1\Gametest1\picture\pollman.png");
-
-            float x = (float)this.ballPos.X - ballRadius;
-            float y = (float)this.ballPos.Y - ballRadius;
-
-            RectangleF srcRect = new RectangleF(0.0F, 0.0F, 100.0F, 200.0F);
-            GraphicsUnit units = GraphicsUnit.Pixel;
-
-            e.Graphics.DrawImage(newImage, x, y, srcRect, units);
         }
 
         private void KeyPressed(object sender, KeyPressEventArgs e)
@@ -120,7 +119,7 @@ namespace Gametest1
             }
         }
 
-        private void KeyUP(object sender, KeyEventArgs e)
+        private void Keyup(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.A)
             {
