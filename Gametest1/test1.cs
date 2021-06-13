@@ -49,19 +49,21 @@ namespace Gametest1
             return a;
         }
 
-        public int Wall(Vector ball)
+        public int RightWall(Vector ball)
         {
             Form1 F = new Form1();
 
             int b = 0;
 
-            if(ball.X == 0)
-            {
-                b = 0;
-            }else if(ball.X + 10 == F.Bounds.Width)
-            {
-                b = F.Bounds.Width;
-            }
+            return b;
+        }
+
+        public int LeftWall(Vector ball)
+        {
+            Form1 F = new Form1();
+
+            int b = 0;
+            b = F.Bounds.Width;
 
             return b;
         }

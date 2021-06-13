@@ -10,6 +10,8 @@ namespace Gametest1
 {
     class Charactor
     {
+        int Width;
+
         public Charactor()
         {
 
@@ -19,6 +21,13 @@ namespace Gametest1
         {
             Image newImage = Image.FromFile(@"C:\Users\kanon\source\testC#\Gametest1\Gametest1\picture\pollman2.png");
             e.Graphics.DrawImage(newImage, p);
+            Width = newImage.Width;
+        }
+
+        public int w()
+        {
+            int haba = Width;
+            return haba;
         }
 
     }

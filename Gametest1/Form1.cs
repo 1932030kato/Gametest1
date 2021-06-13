@@ -16,8 +16,7 @@ namespace Gametest1
         Vector ballPos;
         Vector ballSpeed;
         int ballRadius;
-        int gravity = 1;
-        int sw = 0;
+        int gravity = 1, sw = 0;
         test1 t = new test1();
         Charactor hero = new Charactor();
         Timer timer;
@@ -33,7 +32,6 @@ namespace Gametest1
             this.timer = new Timer();
             this.timer.Interval = 10;
             this.timer.Tick += new EventHandler(Update);
-            //this.timer.Start();
         }
 
         private void Update(object sender, EventArgs e)
@@ -58,9 +56,16 @@ namespace Gametest1
 
         private void Wall()
         {
-            if(this.ballPos.X == t.Wall(this.ballPos))
+            if(this.ballPos.X + this.ballSpeed.X  <= t.RightWall(this.ballPos))
             {
                 this.ballSpeed.X = 0;
+                this.ballPos.X = t.RightWall(this.ballPos);
+            }
+
+            if (this.ballPos.X + this.ballSpeed.X + hero.w() >= t.LeftWall(this.ballPos))
+            {
+                this.ballSpeed.X = 0;
+                this.ballPos.X = t.LeftWall(this.ballPos) - hero.w();
             }
         }
 
@@ -74,7 +79,7 @@ namespace Gametest1
 
         private void Draw(object sender, PaintEventArgs e)
         {
-            int x = (int)this.ballPos.X - ballRadius;
+            int x = (int)this.ballPos.X;
             int y = (int)this.ballPos.Y - ballRadius;
 
             System.Drawing.Point ulCorner = new System.Drawing.Point(x, y - 10);
@@ -94,7 +99,6 @@ namespace Gametest1
         {
             if (e.KeyChar == 'a')
             {
-                //Console.WriteLine("a");
                 if (this.ballSpeed.X >= -10)
                 {
                     this.ballSpeed.X -= 5;
@@ -134,7 +138,6 @@ namespace Gametest1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Console.WriteLine("Button on");
             this.timer.Start();
             button1.Visible = false;
             button2.Visible = true;
